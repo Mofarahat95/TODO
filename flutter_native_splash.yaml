@@ -1,0 +1,11 @@
+flutter_native_splash:
+  color: "#DFECDB"
+  image: assets/images/logo.png
+#  branding: assets/images/branding.png  # مسار صورة البراندينج
+#  branding_mode: bottom
+#  branding_bottom_padding: 0
+  android_12:
+    image: assets/images/logo.png
+#    branding: assets/images/branding.png  # مسار صورة البراندينج
+#    branding_mode: bottom
+#    branding_bottom_padding: 0
