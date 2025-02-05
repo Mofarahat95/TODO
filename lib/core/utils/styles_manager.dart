@@ -1,24 +1,37 @@
 import 'dart:ui';
 
+import 'package:flutter/src/painting/text_style.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:todo/core/utils/colors_manager.dart';
 import 'package:todo/core/utils/fonts_manager.dart';
 
-TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
-  return TextStyle(
-    fontSize: fontSize,
-    fontFamily: FontConstants.fontFamily,
-    fontWeight: fontWeight,
-    color: color,
-  );
-}
-
-TextStyle getSmallStyle({double size = FontSize.s12, required Color color}) {
-  return _getTextStyle(size, FontWeightManager.small, color);
-}
-
-TextStyle getMediumStyle({double size = FontSize.s14, required color}) {
-  return _getTextStyle(size, FontWeightManager.medium, color);
-}
-
-TextStyle getlargeStyle({double size = FontSize.s18, required color}) {
-  return _getTextStyle(size, FontWeightManager.smaiBold, color);
-}
+TextStyle poppins22() => GoogleFonts.poppins(
+      fontSize: FontSize.s22,
+      fontWeight: FontWeightManager.bold,
+      color: AppColors.whiteColor,
+    );
+TextStyle poppins20() => GoogleFonts.poppins(
+      fontSize: FontSize.s20,
+      fontWeight: FontWeightManager.bold,
+      color: AppColors.whiteColor,
+    );
+TextStyle poppins18() => GoogleFonts.poppins(
+      fontSize: FontSize.s18,
+      fontWeight: FontWeightManager.bold,
+      color: AppColors.whiteColor,
+    );
+TextStyle inter22() => GoogleFonts.inter(
+      fontSize: FontSize.s22,
+      fontWeight: FontWeightManager.bold,
+      color: AppColors.whiteColor,
+    );
+TextStyle inter20() => GoogleFonts.inter(
+      fontSize: FontSize.s20,
+      fontWeight: FontWeightManager.normal,
+      color: AppColors.blackColor,
+    );
+TextStyle inter18() => GoogleFonts.inter(
+      fontSize: FontSize.s18,
+      fontWeight: FontWeightManager.light,
+      color: AppColors.blackColor,
+    );
