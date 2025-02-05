@@ -1,8 +1,5 @@
 import 'dart:ui';
 
-abstract class FontConstants{
-static const String fontFamily='Roboto';
-}
 abstract class FontSize{
   static const double s12=12;
   static const double s14=14;
@@ -14,7 +11,8 @@ abstract class FontSize{
   static const double s26=26;
 }
 abstract class FontWeightManager{
-  static const FontWeight small=FontWeight.w400;
+  static const FontWeight light=FontWeight.w300;
+  static const FontWeight normal=FontWeight.w400;
   static const FontWeight medium=FontWeight.w500;
   static const FontWeight smaiBold=FontWeight.w600;
   static const FontWeight bold=FontWeight.w700;
