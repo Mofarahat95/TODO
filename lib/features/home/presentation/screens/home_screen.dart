@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             extendBody: true,
             appBar: AppBar(
               title: Text(
-                AppStrings.appName,
+                AppStrings.appName.tr(),
               ), // Text
             ),
             body: pro.tabs[pro.selectedIndex],

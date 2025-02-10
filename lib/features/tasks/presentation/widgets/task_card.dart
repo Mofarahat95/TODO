@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
+import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
 import 'package:todo/features/tasks/presentation/widgets/CustomSlidable.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({super.key});
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<SettingsProvider>(context);
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSize.s18),
-          color: AppColors.whiteColor,
+          color: pro.selectedTheme == ThemeMode.light
+              ? AppColors.whiteColor
+              : AppColors.secondryDarkColor,
         ),
         width: MediaQuery.sizeOf(context).width * .88,
         height: MediaQuery.sizeOf(context).height * .130,
