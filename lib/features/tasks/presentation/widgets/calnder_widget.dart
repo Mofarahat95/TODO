@@ -29,7 +29,7 @@ class CalenderWidget extends StatelessWidget {
       activeBackgroundDayColor: pro.selectedTheme == ThemeMode.light
           ? AppColors.whiteColor
           : AppColors.secondryDarkColor,
-      locale: 'en_ISO',
+
     );
   }
 }

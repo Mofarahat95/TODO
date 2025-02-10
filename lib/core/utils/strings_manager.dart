@@ -17,6 +17,6 @@ class AppStrings {
   static const String emailHint = 'Enter Email';
   static const String passwordHint = 'Enter Password';
   static const String taskHint = 'enter your task';
-  static const String descrpitionkHint = 'enter your task';
+  static const String descrpitionkHint = 'enter your des';
   static const String selecetDate = 'Select Time';
 }
