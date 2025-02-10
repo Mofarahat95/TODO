@@ -8,6 +8,7 @@ class AppStrings {
     color: Colors.yellow,
   );
   static const String appName = 'To Do List';
+  static const String settings = 'Settings';
   static const String addTask = 'Add New Task';
   static const String welcomeMessage = 'أهلاً وسهلاً بك!';
   static const String login = 'Login';

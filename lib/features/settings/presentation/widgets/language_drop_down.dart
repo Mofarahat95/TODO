@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
@@ -11,7 +10,7 @@ class LanguageDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pro =  Provider.of<SettingsProvider>(context);
+    var pro = Provider.of<SettingsProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -20,27 +19,38 @@ class LanguageDropDown extends StatelessWidget {
         children: [
           Text(
             'Language',
-            style: poppins16().copyWith(color: AppColors.blackColor),
+            style: poppins16().copyWith(
+                color: pro.selectedTheme == ThemeMode.dark
+                    ? AppColors.whiteColor
+                    : AppColors.blackColor),
           ),
           Container(
             margin: EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
-                color: AppColors.whiteColor,
+                color: pro.selectedTheme == ThemeMode.dark
+                    ? AppColors.transparentColor
+                    : AppColors.whiteColor,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: AppColors.primaryColor)),
             child: DropdownButtonFormField<String>(
+                dropdownColor: pro.selectedTheme == ThemeMode.light
+                    ? AppColors.whiteColor
+                    : AppColors.secondryDarkColor,
                 padding: EdgeInsets.only(left: 10),
                 value: pro.selectedLang.toString(),
                 items: pro.language.map((lang) {
                   return DropdownMenuItem(
                     value: lang,
-                    child: Text(lang),
+                    child: Text(
+                      lang,
+                      style: inter18().copyWith(
+                          color: pro.selectedTheme == ThemeMode.dark
+                              ? AppColors.primaryColor
+                              : null),
+                    ),
                   );
                 }).toList(),
                 iconEnabledColor: AppColors.primaryColor,
-                decoration: InputDecoration(
-                  iconColor: AppColors.primaryColor,
-                ),
                 onChanged: (value) {
                   pro.changeLangauge(value!, context);
                 }),

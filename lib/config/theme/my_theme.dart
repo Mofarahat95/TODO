@@ -5,10 +5,6 @@ import 'package:todo/core/utils/values_manager.dart';
 
 class MyTheme {
   static ThemeData lihgt = ThemeData(
-    appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.primaryColor,
-      titleTextStyle: poppins22(),
-    ),
     scaffoldBackgroundColor: AppColors.bgLigthColor,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         elevation: 0,
@@ -28,14 +24,12 @@ class MyTheme {
             fixedSize: Size(70, 35),
             iconColor: AppColors.whiteColor,
             iconSize: 30)),
-
     dividerTheme: DividerThemeData(
       color: AppColors.primaryColor,
       thickness: 5,
       endIndent: 22,
       indent: 22,
     ),
-
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       iconSize: AppSize.s26,
       shape: RoundedRectangleBorder(
@@ -72,25 +66,26 @@ class MyTheme {
             fixedSize: Size(70, 35),
             iconColor: AppColors.whiteColor,
             iconSize: 30)),
-
     dividerTheme: DividerThemeData(
       color: AppColors.primaryColor,
       thickness: 5,
       endIndent: 22,
       indent: 22,
     ),
-
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       iconSize: AppSize.s26,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
           side: BorderSide(
             width: 4,
-            color: AppColors.greenColor,
+            color: AppColors.graykColor,
           )),
       backgroundColor: AppColors.primaryColor,
     ),
-
+    dropdownMenuTheme: DropdownMenuThemeData(
+      textStyle: inter18().copyWith(
+        color: AppColors.primaryColor,
+      ),
+    ),
   );
-
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
+import 'package:todo/core/utils/fonts_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
@@ -40,14 +41,22 @@ class TaskCard extends StatelessWidget {
                       color: AppColors.primaryColor,
                     ),
                   ),
-                  const Row(
+                   Row(
                     children: [
                       Icon(
                         Icons.watch_later_outlined,
-                        color: AppColors.blackColor,
+                        color: pro.selectedTheme == ThemeMode.light
+                            ? AppColors.iconColor
+                            : AppColors.whiteColor,
                         size: 20,
                       ),
-                      Text('10:44 AM'),
+                      const SizedBox(width: AppSize.s4,),
+                      Text('10:44 AM',style: inter14().copyWith(
+                        fontSize: FontSize.s12,
+                        color: pro.selectedTheme == ThemeMode.light
+                            ? AppColors.blackColor
+                            : AppColors.whiteColor,
+                      ),),
                     ],
                   ),
                 ],

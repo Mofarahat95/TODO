@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:todo/core/utils/colors_manager.dart';
+import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
+import 'package:todo/features/home/presentation/screens/widgets/customAppBar.dart';
 import 'package:todo/features/tasks/presentation/widgets/calnder_widget.dart';
 import 'package:todo/features/tasks/presentation/widgets/task_card.dart';
 
@@ -12,14 +14,9 @@ class TasksScreen extends StatelessWidget {
     return Column(
       children: [
         Stack(
-          alignment: Alignment(0, 4),
+          alignment: Alignment(0, 1.3),
           children: [
-            Container(
-              height: AppSize.s30 * 4,
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor,
-              ),
-            ),
+            CustomAppBar(title: AppStrings.appName),
             CalenderWidget(),
           ],
         ),

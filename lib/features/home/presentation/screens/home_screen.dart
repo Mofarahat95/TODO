@@ -1,8 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
-import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/home/presentation/provider/tabs_provider.dart';
 import 'package:todo/features/home/presentation/screens/widgets/custoBottomNavBar.dart';
@@ -18,11 +16,6 @@ class HomeScreen extends StatelessWidget {
           var pro = Provider.of<TabsProvider>(context);
           return Scaffold(
             extendBody: true,
-            appBar: AppBar(
-              title: Text(
-                AppStrings.appName.tr(),
-              ), // Text
-            ),
             body: pro.tabs[pro.selectedIndex],
             bottomNavigationBar: BottomAppBar(
                 notchMargin: AppSize.s9,

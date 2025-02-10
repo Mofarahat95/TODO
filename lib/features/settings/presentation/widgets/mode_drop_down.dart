@@ -16,25 +16,36 @@ class ModeDropDown extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
+        spacing: AppSize.s10,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             'Mode',
-            style: poppins16().copyWith(color: AppColors.blackColor),
+            style: poppins16().copyWith(
+                color: pro.selectedTheme==ThemeMode.dark ?
+                AppColors.whiteColor : AppColors.blackColor),
           ),
           Container(
             margin: EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
-                color: AppColors.whiteColor,
+                color: pro.selectedTheme==ThemeMode.light ?
+            AppColors.whiteColor : null,
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(width: 1, color: AppColors.primaryColor)),
             child: DropdownButtonFormField<String>(
+              dropdownColor: pro.selectedTheme == ThemeMode.light
+                  ? AppColors.whiteColor
+                  : AppColors.secondryDarkColor,
               padding: EdgeInsets.symmetric(horizontal: 10),
               value: currentTheme,
               items: pro.theme.map((theme) {
                 return DropdownMenuItem(
                   value: theme.toString(),
-                  child: Text(theme),
+                  child: Text(theme,style: inter18().copyWith(
+                      color: pro.selectedTheme == ThemeMode.dark
+                          ? AppColors.primaryColor
+                          : null,
+                  ),),
                 );
               }).toList(),
               iconEnabledColor: AppColors.primaryColor,
