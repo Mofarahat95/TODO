@@ -7,11 +7,21 @@ import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
+import 'package:todo/features/tasks/domain/task_model.dart';
 import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
+import 'package:todo/firebase_functions.dart';
 
-class AddTaskWidget extends StatelessWidget {
+class AddTaskWidget extends StatefulWidget {
   const AddTaskWidget({super.key});
 
+  @override
+  State<AddTaskWidget> createState() => _AddTaskWidgetState();
+}
+
+class _AddTaskWidgetState extends State<AddTaskWidget> {
+  var titleController = TextEditingController();
+  var desController = TextEditingController();
+  var dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -42,6 +52,7 @@ class AddTaskWidget extends StatelessWidget {
                             : null),
                   ),
                   TextFormField(
+                    controller: titleController,
                     decoration: InputDecoration(
                         hintText: AppStrings.taskHint,
                         border: OutlineInputBorder(
@@ -49,6 +60,7 @@ class AddTaskWidget extends StatelessWidget {
                         )),
                   ),
                   TextFormField(
+                    controller: desController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                         hintText: AppStrings.descrpitionkHint,
@@ -59,10 +71,9 @@ class AddTaskWidget extends StatelessWidget {
                   Text(
                     AppStrings.selecetDate,
                     style: inter20().copyWith(
-                      color: settingsPro.selectedTheme == ThemeMode.dark
-                    ? AppColors.whiteColor
-                        : null
-                    ),
+                        color: settingsPro.selectedTheme == ThemeMode.dark
+                            ? AppColors.whiteColor
+                            : null),
                   ),
                   InkWell(
                     onTap: () {
@@ -70,12 +81,11 @@ class AddTaskWidget extends StatelessWidget {
                     },
                     child: Text(
                       textAlign: TextAlign.center,
-                      pro.selectedDate.toString().substring(0, 10),
+                      pro.selectedDatePicker.toString().substring(0, 10),
                       style: inter18().copyWith(
                           color: settingsPro.selectedTheme == ThemeMode.dark
                               ? AppColors.whiteColor
-                              : null
-                      ),
+                              : null),
                     ),
                   ),
                   ElevatedButton(
@@ -87,6 +97,12 @@ class AddTaskWidget extends StatelessWidget {
                       backgroundColor: AppColors.primaryColor,
                     ),
                     onPressed: () {
+                      FirebaseFunctions.addTask(TaskModel(
+                        title: titleController.text,
+                        description: desController.text,
+                        date: DateUtils.dateOnly(pro.selectedDatePicker)
+                            .millisecondsSinceEpoch,
+                      ));
                       GoRouter.of(context).pop();
                     },
                   )

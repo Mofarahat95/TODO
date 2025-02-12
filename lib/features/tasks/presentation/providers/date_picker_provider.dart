@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo/core/utils/colors_manager.dart';
 
 class DatePickerProvider extends ChangeNotifier {
-  DateTime? selectedDate = DateTime.now();
+  DateTime selectedDatePicker = DateTime.now();
+  DateTime selectedDateCalender = DateTime.now();
+
+  changeDateCalender(DateTime date) {
+    selectedDateCalender = date;
+    notifyListeners();
+  }
 
   CustomDatePicker(BuildContext context) async {
     DateTime? chosenDate = await showDatePicker(
@@ -12,8 +17,9 @@ class DatePickerProvider extends ChangeNotifier {
       lastDate: DateTime.now().add(Duration(days: 365)),
     );
     if (chosenDate != null) {
-      selectedDate = chosenDate;
+      selectedDatePicker = chosenDate;
       notifyListeners();
     }
+    ;
   }
 }
