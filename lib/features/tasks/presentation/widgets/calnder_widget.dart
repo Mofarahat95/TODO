@@ -4,21 +4,29 @@ import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
+import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
+import 'package:todo/firebase_functions.dart';
 
-class CalenderWidget extends StatelessWidget {
+class CalenderWidget extends StatefulWidget {
   CalenderWidget({super.key});
 
-  DateTime selectedDate = DateTime.now();
+  @override
+  State<CalenderWidget> createState() => _CalenderWidgetState();
+}
 
+class _CalenderWidgetState extends State<CalenderWidget> {
   @override
   Widget build(BuildContext context) {
     var pro = Provider.of<SettingsProvider>(context);
+    var proDate = Provider.of<DatePickerProvider>(context);
     return CalendarTimeline(
-      initialDate: selectedDate,
+      initialDate: proDate.selectedDateCalender,
       firstDate: DateTime.now().subtract(Duration(days: 365)),
       lastDate: DateTime(2026, 11, 20).add(Duration(days: 365)),
       onDateSelected: (date) {
-        selectedDate = date;
+        proDate.changeDateCalender(date);
+        print(proDate.selectedDateCalender);
+        setState(() {});
       },
       leftMargin: AppMargin.m8,
       monthColor: AppColors.whiteColor,
@@ -29,7 +37,6 @@ class CalenderWidget extends StatelessWidget {
       activeBackgroundDayColor: pro.selectedTheme == ThemeMode.light
           ? AppColors.whiteColor
           : AppColors.secondryDarkColor,
-      locale: 'en_ISO',
     );
   }
 }
