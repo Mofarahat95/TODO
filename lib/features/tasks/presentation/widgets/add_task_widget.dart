@@ -1,3 +1,5 @@
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +9,7 @@ import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
-import 'package:todo/features/tasks/domain/task_model.dart';
+import 'package:todo/features/tasks/data/task_model.dart';
 import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
 import 'package:todo/firebase_functions.dart';
 
@@ -22,6 +24,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
   var titleController = TextEditingController();
   var desController = TextEditingController();
   var dateController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -98,6 +101,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     ),
                     onPressed: () {
                       FirebaseFunctions.addTask(TaskModel(
+                        uid: FirebaseAuth.instance.currentUser!.uid,
                         title: titleController.text,
                         description: desController.text,
                         date: DateUtils.dateOnly(pro.selectedDatePicker)
