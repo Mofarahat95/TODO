@@ -5,7 +5,7 @@ import 'package:todo/core/utils/fonts_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
-import 'package:todo/features/tasks/domain/task_model.dart';
+import 'package:todo/features/tasks/data/task_model.dart';
 import 'package:todo/features/tasks/presentation/widgets/CustomSlidable.dart';
 import 'package:todo/firebase_functions.dart';
 

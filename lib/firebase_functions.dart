@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo/features/tasks/domain/task_model.dart';
+import 'package:todo/features/tasks/data/task_model.dart';
 
 class FirebaseFunctions {
   static CollectionReference<TaskModel> getCollection() {
@@ -22,7 +23,9 @@ class FirebaseFunctions {
   static Stream<QuerySnapshot<TaskModel>> getTasks(DateTime date) {
     var collection = getCollection();
     return collection
-        .where("date", isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("date",
+            isEqualTo: DateUtils.dateOnly(date).millisecondsSinceEpoch)
         .snapshots();
   }
 

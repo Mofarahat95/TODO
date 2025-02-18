@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    navigateToHome(context);
+    navigateTo(context);
   }
   @override
   Widget build(BuildContext context) {
