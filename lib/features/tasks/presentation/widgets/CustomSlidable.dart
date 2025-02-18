@@ -29,7 +29,7 @@ class CustomSlidable extends StatelessWidget {
             onPressed: onEdit,
             backgroundColor: AppColors.primaryColor,
             foregroundColor: AppColors.whiteColor,
-            icon: Icons.share,
+            icon: Icons.edit_note_outlined,
             label: 'Edite',
           ),
         ]));

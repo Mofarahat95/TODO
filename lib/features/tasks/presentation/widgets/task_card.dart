@@ -5,10 +5,15 @@ import 'package:todo/core/utils/fonts_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
+import 'package:todo/features/tasks/domain/task_model.dart';
 import 'package:todo/features/tasks/presentation/widgets/CustomSlidable.dart';
+import 'package:todo/firebase_functions.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({super.key});
+  const TaskCard({required this.model, super.key});
+
+  final TaskModel model;
+
   @override
   Widget build(BuildContext context) {
     var pro = Provider.of<SettingsProvider>(context);
@@ -22,6 +27,9 @@ class TaskCard extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width * .88,
         height: MediaQuery.sizeOf(context).height * .130,
         child: CustomSlidable(
+          onDelete: (context) {
+            FirebaseFunctions.deleteTask(model.id);
+          },
           child: Row(
             children: [
               const SizedBox(
@@ -36,27 +44,32 @@ class TaskCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Task Name',
+                    model.title,
                     style: poppins20().copyWith(
                       color: AppColors.primaryColor,
                     ),
                   ),
-                   Row(
+                  Row(
                     children: [
                       Icon(
-                        Icons.watch_later_outlined,
+                        Icons.description,
                         color: pro.selectedTheme == ThemeMode.light
                             ? AppColors.iconColor
                             : AppColors.whiteColor,
                         size: 20,
                       ),
-                      const SizedBox(width: AppSize.s4,),
-                      Text('10:44 AM',style: inter14().copyWith(
-                        fontSize: FontSize.s12,
-                        color: pro.selectedTheme == ThemeMode.light
-                            ? AppColors.blackColor
-                            : AppColors.whiteColor,
-                      ),),
+                      const SizedBox(
+                        width: AppSize.s4,
+                      ),
+                      Text(
+                        model.description,
+                        style: inter14().copyWith(
+                          fontSize: FontSize.s12,
+                          color: pro.selectedTheme == ThemeMode.light
+                              ? AppColors.blackColor
+                              : AppColors.whiteColor,
+                        ),
+                      ),
                     ],
                   ),
                 ],
