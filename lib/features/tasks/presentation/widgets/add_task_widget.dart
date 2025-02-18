@@ -1,9 +1,10 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
-import 'package:todo/core/utils/fonts_manager.dart';
 import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
@@ -47,7 +48,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                 children: [
                   Text(
                     textAlign: TextAlign.center,
-                    AppStrings.addTask,
+                    AppStrings.addTask.tr(),
                     style: poppins18().copyWith(
                         color: settingsPro.selectedTheme == ThemeMode.light
                             ? AppColors.blackColor
@@ -56,7 +57,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   TextFormField(
                     controller: titleController,
                     decoration: InputDecoration(
-                        hintText: AppStrings.taskHint,
+                        hintText: AppStrings.taskHint.tr(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppSize.s16),
                         )),
@@ -65,13 +66,13 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     controller: desController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                        hintText: AppStrings.descrpitionkHint,
+                        hintText: AppStrings.descrpitionkHint.tr(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppSize.s16),
                         )),
                   ),
                   Text(
-                    AppStrings.selecetDate,
+                    AppStrings.selecetDate.tr(),
                     style: inter20().copyWith(
                         color: settingsPro.selectedTheme == ThemeMode.dark
                             ? AppColors.whiteColor
@@ -92,7 +93,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                   ),
                   ElevatedButton(
                     child: Text(
-                      'Done',
+                      'Done'.tr(),
                       style: poppins18(),
                     ),
                     style: ElevatedButton.styleFrom(

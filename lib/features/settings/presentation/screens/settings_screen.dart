@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/utils/colors_manager.dart';
@@ -17,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: AppSize.s20,
       children: [
-        CustomAppBar(title: AppStrings.settings),
+        CustomAppBar(title: AppStrings.settings.tr()),
         LanguageDropDown(),
         ModeDropDown(),
       ],

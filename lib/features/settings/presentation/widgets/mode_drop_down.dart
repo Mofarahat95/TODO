@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/colors_manager.dart';
@@ -20,7 +21,7 @@ class ModeDropDown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Mode',
+            'Mode'.tr(),
             style: poppins16().copyWith(
                 color: pro.selectedTheme==ThemeMode.dark ?
                 AppColors.whiteColor : AppColors.blackColor),

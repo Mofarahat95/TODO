@@ -1,3 +1,17 @@
 {
-  "To Do List":"To Do List"
+  "To Do List":"To Do List",
+  "Mode": "Mode",
+  "Language": "Language",
+  "Settings": "Settings",
+  "Tasks": "Tasks",
+  "Add New Task": "Add New Task",
+  "Select Time": "Select Time",
+  "enter your des": "enter your descreption",
+  "enter your task": "enter your task",
+  "Done": "Done",
+  "Ar": "ar",
+  "En": "en",
+  "Light": "light",
+  "Dark": "dark"
+
 }
