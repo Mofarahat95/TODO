@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/config/routes_manager/routes.dart';
 import 'package:todo/core/utils/colors_manager.dart';
-import 'package:todo/features/auth/firebase_auth.dart';
-import 'package:todo/features/auth/signup/data/user_model.dart';
-import 'package:todo/firebase_functions.dart';
+import 'package:todo/features/auth/data/user_model.dart';
+import 'package:todo/features/auth/firebase/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -20,10 +19,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   var _email = TextEditingController();
   var _name = TextEditingController();
-
   var _phone = TextEditingController();
 
-  /*@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
@@ -33,7 +31,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _confirempassword.dispose();
     _phone.dispose();
   }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

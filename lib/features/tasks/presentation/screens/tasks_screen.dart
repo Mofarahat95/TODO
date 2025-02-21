@@ -7,7 +7,7 @@ import 'package:todo/features/home/presentation/screens/widgets/customAppBar.dar
 import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
 import 'package:todo/features/tasks/presentation/widgets/calnder_widget.dart';
 import 'package:todo/features/tasks/presentation/widgets/task_card.dart';
-import 'package:todo/firebase_functions.dart';
+import 'package:todo/features/tasks/firebase/firebase_task.dart';
 
 class TasksScreen extends StatelessWidget {
   TasksScreen({super.key});

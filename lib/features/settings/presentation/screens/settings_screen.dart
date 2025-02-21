@@ -7,6 +7,7 @@ import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/home/presentation/screens/widgets/customAppBar.dart';
 import 'package:todo/features/settings/presentation/widgets/language_drop_down.dart';
+import 'package:todo/features/settings/presentation/widgets/logout_button.dart';
 import 'package:todo/features/settings/presentation/widgets/mode_drop_down.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -21,6 +22,7 @@ class SettingsScreen extends StatelessWidget {
         CustomAppBar(title: AppStrings.settings.tr()),
         LanguageDropDown(),
         ModeDropDown(),
+        LogoutButton(),
       ],
     );
   }

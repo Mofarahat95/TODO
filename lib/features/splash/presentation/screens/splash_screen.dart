@@ -9,16 +9,18 @@ import '../widgets/navigate_to_home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
     navigateTo(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

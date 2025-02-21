@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:todo/features/auth/signup/data/user_model.dart';
+import 'package:todo/features/auth/data/user_model.dart';
 
 class FireAuth {
   static signUpAccount(
@@ -43,16 +43,26 @@ class FireAuth {
     docRef.set(model);
   }
 
-  static loginAccount(String email, String password) async {
+  static Future<UserModel?> readUserData(String userId) async {
+    var collection = getUserCollection();
+    DocumentSnapshot<UserModel> docUser = await collection.doc(userId).get();
+    return docUser.data();
+  }
+
+  static loginAccount(
+    String email,
+    String password, {
+    required Function onSuccess,
+    required Function onError,
+  }) async {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      if (credential.user!.emailVerified) {
+        onSuccess();
       }
+    } on FirebaseAuthException catch (e) {
+      onError(e.message);
     }
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/config/routes_manager/routes.dart';
 import 'package:todo/core/utils/colors_manager.dart';
-import 'package:todo/features/auth/firebase_auth.dart';
-import 'package:todo/firebase_functions.dart';
+import 'package:todo/features/auth/firebase/firebase_auth.dart';
+import 'package:todo/features/auth/provider/user_provider.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -22,7 +23,7 @@ class LoginScreen extends StatelessWidget {
             _header(context),
             _inputField(context),
             _forgotPassword(context),
-            _signup(context),
+            _signupButton(context),
           ],
         ),
       ),
@@ -36,12 +37,13 @@ class LoginScreen extends StatelessWidget {
           "Welcome Back",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("Enter your credential to presentation"),
       ],
     );
   }
 
   _inputField(context) {
+    var pro = Provider.of<UserProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -73,8 +75,23 @@ class LoginScreen extends StatelessWidget {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-            FireAuth.loginAccount(_username.text, _password.text);
-            GoRouter.of(context).push(AppRoutes.homeRoute);
+            FireAuth.loginAccount(
+              _username.text,
+              _password.text,
+              onSuccess: () {
+                pro.initUser().then((value) {
+                  GoRouter.of(context).push(AppRoutes.homeRoute);
+                });
+              },
+              onError: (error) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(error),
+                    backgroundColor: AppColors.primaryColor,
+                  ),
+                );
+              },
+            );
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
@@ -100,7 +117,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  _signup(context) {
+  _signupButton(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
