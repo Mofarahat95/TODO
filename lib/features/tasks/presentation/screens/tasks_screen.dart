@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/utils/strings_manager.dart';
+import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/home/presentation/screens/widgets/customAppBar.dart';
 import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
@@ -41,11 +42,17 @@ class TasksScreen extends StatelessWidget {
                     );
                   } else if (snapshot.hasError) {
                     return Center(
-                      child: Text('Error'),
+                      child: Text(
+                        'Error',
+                        style: inter18(),
+                      ),
                     );
                   } else if (snapshot.data!.docs.isEmpty) {
                     return Center(
-                      child: Text('No Tasks'),
+                      child: Text(
+                        'No Tasks',
+                        style: inter18(),
+                      ),
                     );
                   } else {
                     var tasks =

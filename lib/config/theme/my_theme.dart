@@ -17,7 +17,6 @@ class MyTheme {
     ),
     iconButtonTheme: IconButtonThemeData(
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),

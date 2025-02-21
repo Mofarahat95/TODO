@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/config/routes_manager/routes.dart';
 import 'package:todo/core/utils/colors_manager.dart';
+import 'package:todo/core/utils/extensions.dart';
 import 'package:todo/features/auth/data/user_model.dart';
 import 'package:todo/features/auth/firebase/firebase_auth.dart';
 
@@ -13,13 +14,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _confirempassword = TextEditingController();
-
+  TextEditingController _confirmpassword = TextEditingController();
   var _password = TextEditingController();
-
   var _email = TextEditingController();
   var _name = TextEditingController();
   var _phone = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -28,9 +28,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _email.dispose();
     _password.dispose();
     _name.dispose();
-    _confirempassword.dispose();
+    _confirmpassword.dispose();
     _phone.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,106 +63,139 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   )
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  TextField(
-                    controller: _name,
-                    decoration: InputDecoration(
-                      hintText: "Name",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.purple.withOpacity(0.1),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.person),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _email,
-                    decoration: InputDecoration(
-                        hintText: "Email",
+              Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isValidName(value)) {
+                          return null;
+                        } else {
+                          return "Please enter a valid name";
+                        }
+                      },
+                      controller: _name,
+                      decoration: InputDecoration(
+                        hintText: "Name",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
                         fillColor: Colors.purple.withOpacity(0.1),
                         filled: true,
-                        prefixIcon: const Icon(Icons.email)),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _phone,
-                    decoration: InputDecoration(
-                        hintText: "Phone",
+                        prefixIcon: const Icon(Icons.person),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: _email,
+                      decoration: InputDecoration(
+                          hintText: "Email",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none),
+                          fillColor: Colors.purple.withOpacity(0.1),
+                          filled: true,
+                          prefixIcon: const Icon(Icons.email)),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isValidPhone(value)) {
+                          return null;
+                        } else {
+                          return "Please enter a valid phone number";
+                        }
+                      },
+                      controller: _phone,
+                      decoration: InputDecoration(
+                          hintText: "Phone",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none),
+                          fillColor: Colors.purple.withOpacity(0.1),
+                          filled: true,
+                          prefixIcon: const Icon(Icons.person)),
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isValidPassword(value)) {
+                          return null;
+                        } else {
+                          return "Please enter a valid password";
+                        }
+                      },
+                      controller: _password,
+                      decoration: InputDecoration(
+                        hintText: "Password",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(18),
                             borderSide: BorderSide.none),
                         fillColor: Colors.purple.withOpacity(0.1),
                         filled: true,
-                        prefixIcon: const Icon(Icons.person)),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _password,
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.purple.withOpacity(0.1),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.password),
+                        prefixIcon: const Icon(Icons.password),
+                      ),
+                      obscureText: true,
                     ),
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: "Confirm Password",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.purple.withOpacity(0.1),
-                      filled: true,
-                      prefixIcon: const Icon(Icons.password),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isValidPassword(value)) {
+                          return null;
+                        } else {
+                          return "Password does not match";
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Confirm Password",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(18),
+                            borderSide: BorderSide.none),
+                        fillColor: Colors.purple.withOpacity(0.1),
+                        filled: true,
+                        prefixIcon: const Icon(Icons.password),
+                      ),
+                      obscureText: true,
                     ),
-                    obscureText: true,
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                   padding: const EdgeInsets.only(top: 3, left: 3),
                   child: ElevatedButton(
                     onPressed: () {
-                      FireAuth.signUpAccount(
-                        _email.text,
-                        _password.text,
-                        model: UserModel(
-                            id: '',
-                            name: _name.text,
-                            phone: _phone.text,
-                            email: _email.text),
-                        onSuccess: () {
-                          GoRouter.of(context)
-                              .pushReplacement(AppRoutes.loginRoute);
-                        },
-                        onError: (message) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text('Error'),
-                              content: Text(message),
-                              actions: [
-                                ElevatedButton(
-                                    onPressed: () {
-                                      GoRouter.of(context).pop();
-                                    },
-                                    child: Text('Ok'))
-                              ],
-                            ),
-                          );
-                        },
-                      );
+                      if (formKey.currentState!.validate()) {
+                        FireAuth.signUpAccount(
+                          _email.text,
+                          _password.text,
+                          model: UserModel(
+                              id: '',
+                              name: _name.text,
+                              phone: _phone.text,
+                              email: _email.text),
+                          onSuccess: () {
+                            GoRouter.of(context)
+                                .pushReplacement(AppRoutes.loginRoute);
+                          },
+                          onError: (message) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: Text('Error'),
+                                content: Text(message),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        GoRouter.of(context).pop();
+                                      },
+                                      child: Text('Ok'))
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      }
                     },
                     child: const Text(
                       "Sign up",

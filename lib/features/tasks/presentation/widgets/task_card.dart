@@ -9,11 +9,16 @@ import 'package:todo/features/tasks/data/task_model.dart';
 import 'package:todo/features/tasks/presentation/widgets/CustomSlidable.dart';
 import 'package:todo/features/tasks/firebase/firebase_task.dart';
 
-class TaskCard extends StatelessWidget {
+class TaskCard extends StatefulWidget {
   const TaskCard({required this.model, super.key});
 
   final TaskModel model;
 
+  @override
+  State<TaskCard> createState() => _TaskCardState();
+}
+
+class _TaskCardState extends State<TaskCard> {
   @override
   Widget build(BuildContext context) {
     var pro = Provider.of<SettingsProvider>(context);
@@ -28,7 +33,7 @@ class TaskCard extends StatelessWidget {
         height: MediaQuery.sizeOf(context).height * .130,
         child: CustomSlidable(
           onDelete: (context) {
-            FirebaseFunctions.deleteTask(model.id);
+            FirebaseFunctions.deleteTask(widget.model.id);
           },
           child: Row(
             children: [
@@ -44,9 +49,11 @@ class TaskCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.title,
+                    widget.model.title,
                     style: poppins20().copyWith(
-                      color: AppColors.primaryColor,
+                      color: widget.model.isDone
+                          ? AppColors.greenColor
+                          : AppColors.primaryColor,
                     ),
                   ),
                   Row(
@@ -62,7 +69,7 @@ class TaskCard extends StatelessWidget {
                         width: AppSize.s4,
                       ),
                       Text(
-                        model.description,
+                        widget.model.description,
                         style: inter14().copyWith(
                           fontSize: FontSize.s12,
                           color: pro.selectedTheme == ThemeMode.light
@@ -76,7 +83,15 @@ class TaskCard extends StatelessWidget {
               ),
               const Spacer(),
               IconButton(
-                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: widget.model.isDone
+                          ? AppColors.greenColor
+                          : AppColors.primaryColor),
+                  onPressed: () {
+                    widget.model.isDone = true;
+                    FirebaseFunctions.updateTask(widget.model);
+                    setState(() {});
+                  },
                   icon: Icon(
                     Icons.done,
                   )),

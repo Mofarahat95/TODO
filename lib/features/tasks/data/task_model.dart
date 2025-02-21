@@ -2,7 +2,7 @@ class TaskModel {
   final String title;
   final String description;
   final int date;
-  final bool isDone;
+   bool isDone;
   String id;
   String uid;
 
