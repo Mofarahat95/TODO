@@ -5,6 +5,7 @@ import 'package:todo/core/utils/strings_manager.dart';
 import 'package:todo/core/utils/styles_manager.dart';
 import 'package:todo/core/utils/values_manager.dart';
 import 'package:todo/features/home/presentation/screens/widgets/customAppBar.dart';
+import 'package:todo/features/settings/presentation/provider/settings_provider.dart';
 import 'package:todo/features/tasks/presentation/providers/date_picker_provider.dart';
 import 'package:todo/features/tasks/presentation/widgets/calnder_widget.dart';
 import 'package:todo/features/tasks/presentation/widgets/task_card.dart';
@@ -20,6 +21,7 @@ class TasksScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           var pro = Provider.of<DatePickerProvider>(context);
+          var settingsPro = Provider.of<SettingsProvider>(context);
 
           return Column(
             children: [
@@ -51,7 +53,11 @@ class TasksScreen extends StatelessWidget {
                     return Center(
                       child: Text(
                         'No Tasks',
-                        style: inter18(),
+                        style: inter18().copyWith(
+                          color: settingsPro.selectedTheme == ThemeMode.dark
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
                     );
                   } else {

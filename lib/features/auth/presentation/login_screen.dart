@@ -80,7 +80,7 @@ class LoginScreen extends StatelessWidget {
               _password.text,
               onSuccess: () {
                 pro.initUser().then((value) {
-                  GoRouter.of(context).push(AppRoutes.homeRoute);
+                  GoRouter.of(context).go(AppRoutes.homeRoute);
                 });
               },
               onError: (error) {

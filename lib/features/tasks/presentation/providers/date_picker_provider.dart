@@ -4,8 +4,9 @@ class DatePickerProvider extends ChangeNotifier {
   DateTime selectedDatePicker = DateTime.now();
   DateTime selectedDateCalender = DateTime.now();
 
-  changeDateCalender(DateTime date) {
+   changeDateCalender(DateTime date) {
     selectedDateCalender = date;
+    print(date);
     notifyListeners();
   }
 

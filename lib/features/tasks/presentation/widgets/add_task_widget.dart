@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +26,7 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var Pro = Provider.of<SettingsProvider>(context);
     return ChangeNotifierProvider(
         create: (context) => DatePickerProvider(),
         builder: (context, child) {
@@ -58,6 +58,11 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     controller: titleController,
                     decoration: InputDecoration(
                         hintText: AppStrings.taskHint.tr(),
+                        hintStyle: TextStyle(
+                          color: settingsPro.selectedTheme == ThemeMode.dark
+                              ? AppColors.whiteColor
+                              : null,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppSize.s16),
                         )),
@@ -66,6 +71,11 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
                     controller: desController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
+                        hintStyle: TextStyle(
+                          color: settingsPro.selectedTheme == ThemeMode.dark
+                              ? AppColors.whiteColor
+                              : null,
+                        ),
                         hintText: AppStrings.descrpitionkHint.tr(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(AppSize.s16),
